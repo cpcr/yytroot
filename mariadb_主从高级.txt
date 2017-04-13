@@ -1,4 +1,0 @@
-1、主从复制部署配置问题汇总
-show  master  status  没有结果  --没有开启二进制日志
-log-bin
-show  variables  like  '%log_bin%';
