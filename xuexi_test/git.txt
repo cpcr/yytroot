@@ -1,0 +1,83 @@
+廖雪峰 http://www.liaoxuefeng.com/
+git 的基础使用指南
+一、安装git
+二、创建版本库
+    1、创建空目录
+    $ mkdir learngit
+    $ cd learngit
+    $ pwd
+    /Users/michael/learngit 
+	2、通过git init命令把这个目录变成Git可以管理的仓库：
+	git init
+	3、添加文件到版本库
+	git add  readme.txt
+	4、提交文件到版本库
+	git commit -m "add txt"
+三、查看版本的状态以及看版本号
+    1、查看文件的状态
+	git status
+	2、查看更改的内容
+	git diff
+四、版本回退
+    1、在文件中修改多次，查看修改的日志内容
+	git  log  后者  git log  --pretty=oneline
+	2、版本回退
+	git  reset   --hard HEAD^  ##上一个版本就是HEAD^，上上一个版本就是HEAD^^，当然往上100个版本写100个^比较容易数不过来，所以写成HEAD~100。
+    3、回退到指定的版本号
+	git reset  --hard  版本序列号前几位
+	4、查看回退版本的记录命令
+	git reflog
+    5、撤销修改(还未git add)
+    git  checkout    -- readme.txt	
+	6、撤销已经add 的但是还未commit的
+	git  reset  HEAD readme.txt
+五、删除文件
+     1、删除文件
+     git rm  test.txt
+     2、提交删除更改
+     git   commit  -m   "remove  test.txt"	 
+	 3、文件在rm -rf后。感觉删除错了，可以用checkout一键还原
+	 git  checkout --   test.txt
+六、远程仓库
+    远程仓库包括官方的github还有自己在局域网搭建的git使用
+	在本地生成创建SSH Key
+	1、创建SSH Key。在用户主目录下，看看有没有.ssh目录，如果有，
+	再看看这个目录下有没有id_rsa和id_rsa.pub这两个文件，如果已经有了，可直接跳到下一步。
+	如果没有，打开Shell（Windows下打开Git Bash），创建SSH Key：
+	ssh-keygen -t rsa -C "youremail@example.com"
+	2、登陆GitHub，打开“Account settings”，“SSH Keys”页面：
+	点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容：
+七、添加远程仓库
+    1、在远程仓库创建跟本地一样的名字的仓库
+	2、本地的仓库关联远程仓库
+	 git remote add origin git@github.com:michaelliao/learngit.git
+	3、把本地的内容推送到远程仓库
+	 git push -u origin master    （第一次远程仓库是空的，推送本地内容到远程仓库，用参数-u）
+	4、第二次推送本地的内容到远程仓库后
+	 git  push  origin master
+八、从远程仓库克隆
+    1、首先，登陆GitHub，创建一个新的仓库，名字叫gitskills：
+	2、git clone git@github.com:michaelliao/gitskills.git
+九、创建和合并分支
+    1、首先，我们创建dev分支，然后切换到dev分支：
+	 git branch dev
+	 git checkout dev
+	 等同于git checkout -b dev
+	2、查看当前分支
+     git  branch
+    3、分支合并到master分支
+     git checkout master	
+	 git merge dev
+	4、删除dev分支
+	 git branch -d dev
+十、解决冲突
+    1、合并分支到master，再看冲突内容，再人工解决冲突
+	git merge feature1 
+十一、分支管理策略
+    通常，合并分支时候，git会用fast forward模式，这种模式，删除分支，会丢掉分支信息
+	禁用fast forword模式，，实践下 --no-ff方式的git merge：
+	1、创建并切换分支
+	 git  checkout  -b  dev
+	 
+    
+	
